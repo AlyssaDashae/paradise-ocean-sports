@@ -588,7 +588,7 @@ footer {
 
 <!-- HERO -->
 <header class="hero" id="home">
-  <video autoplay muted loop playsinline id="bg-video">
+  <video autoplay muted loop playsinline webkit-playsinline id="bg-video">
     <source src="Hero-video.mp4" type="video/mp4">
   </video>
 
@@ -745,6 +745,32 @@ footer {
 </footer>
 
 <script>
+  /* ── Mobile Video Autoplay Fix ── */
+  const vid = document.getElementById('bg-video');
+  vid.muted = true;
+  vid.setAttribute('muted', '');
+  vid.setAttribute('playsinline', '');
+  vid.setAttribute('webkit-playsinline', '');
+
+  function tryPlay() {
+    vid.play().catch(() => {});
+  }
+
+  // Try immediately
+  tryPlay();
+
+  // Try again once page is fully loaded
+  window.addEventListener('load', tryPlay);
+
+  // Try on first touch/click (iOS often needs this)
+  document.addEventListener('touchstart', tryPlay, { once: true });
+  document.addEventListener('click', tryPlay, { once: true });
+
+  // Also handle visibility change (e.g. user switches tabs and comes back)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) tryPlay();
+  });
+
   async function fetchNassauWeather() {
     try {
       const res  = await fetch('https://api.open-meteo.com/v1/forecast?latitude=25.0582&longitude=-77.3431&current=temperature_2m,wind_speed_10m,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph');
