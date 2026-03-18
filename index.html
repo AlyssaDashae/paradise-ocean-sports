@@ -2,505 +2,790 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paradise Ocean Sports | Nassau, Bahamas</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <style>
-  /* ─── Base Reset ─────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; }
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-family: sans-serif; }
+body { background: #0f172a; color: #fff; }
+a { text-decoration: none; color: inherit; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-  /* ─── Glass Effect ───────────────────────────────── */
-  .glass-effect {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,0.2);
-  }
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  font-size: 1.1rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.nav-logo span { color: #22d3ee; }
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: 24px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.nav-desktop a:hover { color: #22d3ee; }
+.nav-desktop .contact-link { color: #fb923c; }
+.btn-book-nav {
+  background: #06b6d4;
+  color: #fff !important;
+  padding: 8px 22px;
+  border-radius: 999px;
+  font-weight: 900;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.btn-book-nav:hover { background: #22d3ee; }
+.nav-mobile-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-book-mobile {
+  background: #06b6d4;
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.btn-book-mobile:hover { background: #22d3ee; }
+#hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.hline {
+  display: block;
+  width: 24px; height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+#mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  background: rgba(15,23,42,0.97);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+#mobile-menu.open { max-height: 400px; }
+.mobile-menu-inner {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+.mobile-menu-inner a { padding: 4px 0; transition: color 0.2s; }
+.mobile-menu-inner a:hover { color: #22d3ee; }
+.mobile-menu-inner .contact-link { color: #fb923c; }
 
-  /* ─── Background Video ───────────────────────────── */
-  #bg-video {
-    position: fixed;
-    top: 50%; left: 50%;
-    min-width: 100%; min-height: 100%;
-    width: auto; height: auto;
-    z-index: -100;
-    transform: translateX(-50%) translateY(-50%);
-    object-fit: cover;
-    filter: brightness(0.6);
-  }
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#bg-video {
+  position: absolute;
+  top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  filter: brightness(0.55);
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 90px 20px 200px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 999px;
+  padding: 5px 16px;
+  margin-bottom: 16px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #22d3ee;
+}
+.hero h1 {
+  font-size: 2.4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.gradient-text {
+  background: linear-gradient(to right, #67e8f9, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+  padding: 0 8px;
+}
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.btn-explore {
+  background: #fff;
+  color: #0f172a;
+  padding: 14px 36px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-explore:hover { background: #22d3ee; color: #fff; }
+.btn-book-hero {
+  background: #06b6d4;
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+  transition: background 0.2s;
+}
+.btn-book-hero:hover { background: #22d3ee; }
 
-  /* ─── Adventure Cards ────────────────────────────── */
-  .adventure-card:hover img {
-    transform: scale(1.05);
-    transition: 0.4s ease-in-out;
-  }
-  .adventure-card img {
-    transition: 0.4s ease-in-out;
-  }
+/* Weather */
+.weather-widget {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 310px;
+  z-index: 2;
+}
+.weather-inner {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.weather-inner i { font-size: 1.5rem; color: #facc15; flex-shrink: 0; }
+.weather-text { text-align: left; }
+.weather-label {
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #22d3ee;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.live-dot {
+  width: 8px; height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  margin-right: 6px;
+  flex-shrink: 0;
+  animation: pulse-green 2s infinite;
+}
+@keyframes pulse-green {
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74,222,128,0.7); }
+  70%  { transform: scale(1);    box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+}
+.weather-row { display: flex; align-items: baseline; gap: 8px; }
+#live-temp { font-size: 1.3rem; font-weight: 900; font-style: italic; }
+#weather-desc { font-size: 10px; font-weight: 700; opacity: 0.6; text-transform: uppercase; }
+#sea-state { font-size: 9px; font-weight: 700; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.05em; font-style: italic; margin-top: 3px; }
 
-  /* ─── Smooth Scroll ──────────────────────────────── */
-  html { scroll-behavior: smooth; }
+/* ══════════════════════════════════════
+   SERVICES
+══════════════════════════════════════ */
+.services-section {
+  background: #e0f2fe;
+  color: #0f172a;
+  padding: 50px 20px;
+}
+.section-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  font-style: italic;
+}
+.section-line {
+  width: 48px; height: 4px;
+  background: #06b6d4;
+  border-radius: 4px;
+  margin: 8px auto 32px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.adventure-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  height: 210px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.adventure-card img { transition: transform 0.4s ease; }
+.adventure-card:hover img { transform: scale(1.05); }
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fff;
+}
+.card-overlay h3 {
+  font-size: 0.95rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.card-overlay p {
+  font-size: 10px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.btn-card {
+  display: block;
+  background: #06b6d4;
+  color: #fff;
+  text-align: center;
+  padding: 7px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: background 0.2s;
+}
+.btn-card:hover { background: #22d3ee; }
 
-  /* ─── Live Dot Pulse ─────────────────────────────── */
-  .live-dot {
-    width: 8px; height: 8px;
-    background-color: #4ade80;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 6px;
-    animation: pulse-green 2s infinite;
-    flex-shrink: 0;
-  }
-  @keyframes pulse-green {
-    0%   { transform: scale(0.95); box-shadow: 0 0 0 0   rgba(74,222,128,0.7); }
-    70%  { transform: scale(1);    box-shadow: 0 0 0 6px rgba(74,222,128,0);   }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0   rgba(74,222,128,0);   }
-  }
+/* ══════════════════════════════════════
+   PACKAGES
+══════════════════════════════════════ */
+.packages-section {
+  background: #f8fafc;
+  color: #1e293b;
+  padding: 50px 20px;
+}
+.packages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.package-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 28px 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+}
+.package-card.featured {
+  border: 2px solid #eab308;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  position: relative;
+}
+.featured-badge {
+  position: absolute;
+  top: -13px; right: 24px;
+  background: #eab308;
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.package-card h3 {
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+.package-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.package-meta.cyan { color: #0891b2; }
+.package-meta.yellow { color: #ca8a04; }
+.package-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+  flex-grow: 1;
+  margin-bottom: 24px;
+}
+.package-list li { display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+.package-list li i { color: #06b6d4; margin-top: 2px; flex-shrink: 0; font-size: 12px; }
+.highlight {
+  background: #ecfeff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  width: 100%;
+}
+.feature-highlight {
+  background: #ecfeff;
+  color: #0891b2;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  width: 100%;
+}
+.note { font-size: 11px; font-style: italic; opacity: 0.75; }
+.note i { color: #fb923c !important; }
+.btn-package {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-package.dark { background: #0f172a; color: #fff; }
+.btn-package.dark:hover { background: #06b6d4; }
+.btn-package.cyan { background: #06b6d4; color: #fff; }
+.btn-package.cyan:hover { background: #0f172a; }
 
-  /* ─── Mobile Navigation ──────────────────────────── */
-  #mobile-menu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-  #mobile-menu.open {
-    max-height: 400px;
-  }
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background: #020617;
+  padding: 48px 20px 24px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 20px;
+  max-width: 1280px;
+  margin: 0 auto 32px;
+}
+.footer-brand { grid-column: 1 / -1; }
+.footer-brand h2 {
+  font-size: 1rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.footer-brand h2 span { color: #22d3ee; font-size: 9px; letter-spacing: 0.15em; }
+.footer-brand p { font-size: 11px; opacity: 0.4; line-height: 1.6; }
+.footer-col h4 {
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #22d3ee;
+  margin-bottom: 10px;
+}
+.footer-col p { font-size: 11px; }
+.muted { opacity: 0.4; margin-bottom: 4px; }
+.strong { font-weight: 900; text-transform: uppercase; }
+.payment-icons { display: flex; flex-wrap: wrap; gap: 12px; font-size: 1.4rem; opacity: 0.3; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 20px;
+  text-align: center;
+  font-size: 10px;
+  opacity: 0.3;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 
-  /* ─── Hero Section ───────────────────────────────── */
-  .hero-section {
-    min-height: 100svh;   /* uses small viewport height on mobile browsers */
-    min-height: 100vh;
-  }
+/* ══════════════════════════════════════
+   TABLET (600px+)
+══════════════════════════════════════ */
+@media (min-width: 600px) {
+  .hero h1 { font-size: 3rem; }
+  .hero-content { padding-bottom: 180px; }
+  .hero-buttons { flex-direction: row; justify-content: center; }
+  .hero-buttons a { width: auto; max-width: none; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .adventure-card { height: 230px; }
+}
 
-  /* ─── Weather Widget  ────────────────────────────── */
+/* ══════════════════════════════════════
+   DESKTOP (1024px+)
+══════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .nav-logo { font-size: 1.4rem; }
+  .nav-desktop { display: flex; }
+  .nav-mobile-right { display: none; }
+  #mobile-menu { display: none !important; }
+
+  .hero-content { padding: 100px 20px 120px; }
+  .hero h1 { font-size: 3.75rem; }
+
   .weather-widget {
-    /* Show on all screens via absolute positioning at hero bottom */
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 3rem);
+    left: 32px;
+    bottom: 32px;
+    transform: none;
+    width: auto;
     max-width: 320px;
   }
-  @media (min-width: 1024px) {
-    .weather-widget {
-      left: 2rem;
-      transform: none;
-      width: auto;
-      max-width: none;
-    }
-  }
 
-  /* ─── Pricing Grid ───────────────────────────────── */
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .pricing-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+  .adventure-card { height: 240px; }
 
-  /* ─── Services Grid ──────────────────────────────── */
-  .services-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-  @media (min-width: 640px) {
-    .services-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (min-width: 1024px) {
-    .services-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
+  .packages-grid { grid-template-columns: 1fr 1fr; }
 
-  /* Remove the desktop-only translate that breaks layout on tablet */
-  @media (max-width: 1023px) {
-    .lg-offset { transform: none !important; }
-  }
-
-  /* ─── Footer Grid ────────────────────────────────── */
   .footer-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem 1.5rem;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
   }
-  @media (min-width: 768px) {
-    .footer-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
+  .footer-brand { grid-column: auto; }
+}
 </style>
 </head>
-<body class="bg-slate-900 text-white font-sans selection:bg-cyan-500">
+<body>
 
-<!-- ═══════════════════════════════════════════════════
-     NAV
-═══════════════════════════════════════════════════ -->
-<nav class="fixed top-0 w-full z-[100] glass-effect border-b border-white/10">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Paradise <span>Ocean Sports</span></a>
 
-    <!-- Logo -->
-    <a href="#" class="text-lg sm:text-xl md:text-2xl font-black italic tracking-tighter uppercase leading-none">
-      Paradise <span class="text-cyan-400">Ocean Sports</span>
-    </a>
-
-    <!-- Desktop Links -->
-    <div class="hidden lg:flex items-center space-x-6 xl:space-x-8 font-bold text-[10px] tracking-[0.2em] uppercase">
-      <a href="#"        class="hover:text-cyan-400 transition">Home</a>
-      <a href="#about"   class="hover:text-cyan-400 transition">About Us</a>
-      <a href="activities.html" class="hover:text-cyan-400 transition">Activities</a>
-      <a href="#contact" class="hover:text-cyan-400 transition text-orange-400">Contact</a>
-      <a href="https://paradiseoceansports.com" target="_blank"
-         class="bg-cyan-500 hover:bg-cyan-400 px-6 py-2 rounded-full transition text-white shadow-lg whitespace-nowrap">
-        Book Now
-      </a>
-      <a href="#" class="text-cyan-400 hover:text-white transition text-lg" aria-label="Shopping Cart">
-        <i class="fas fa-shopping-cart"></i>
-      </a>
+    <div class="nav-desktop">
+      <a href="#">Home</a>
+      <a href="#about">About Us</a>
+      <a href="activities.html">Activities</a>
+      <a href="#contact" class="contact-link">Contact</a>
+      <a href="https://paradiseoceansports.com" target="_blank" class="btn-book-nav">Book Now</a>
+      <a href="#" aria-label="Cart" style="color:#22d3ee;font-size:1.1rem;"><i class="fas fa-shopping-cart"></i></a>
     </div>
 
-    <!-- Mobile: Book Now + Hamburger -->
-    <div class="flex lg:hidden items-center gap-3">
-      <a href="https://paradiseoceansports.com" target="_blank"
-         class="bg-cyan-500 hover:bg-cyan-400 px-4 py-1.5 rounded-full font-black uppercase text-[10px] tracking-widest transition whitespace-nowrap">
-        Book Now
-      </a>
-      <button id="hamburger" aria-label="Toggle menu"
-              class="w-9 h-9 flex flex-col justify-center items-center gap-[5px] focus:outline-none">
-        <span class="hamburger-line block w-6 h-[2px] bg-white rounded transition-all duration-300"></span>
-        <span class="hamburger-line block w-6 h-[2px] bg-white rounded transition-all duration-300"></span>
-        <span class="hamburger-line block w-6 h-[2px] bg-white rounded transition-all duration-300"></span>
+    <div class="nav-mobile-right">
+      <a href="https://paradiseoceansports.com" target="_blank" class="btn-book-mobile">Book Now</a>
+      <button id="hamburger" aria-label="Toggle menu">
+        <span class="hline" id="h1"></span>
+        <span class="hline" id="h2"></span>
+        <span class="hline" id="h3"></span>
       </button>
     </div>
   </div>
 
-  <!-- Mobile Dropdown Menu -->
-  <div id="mobile-menu" class="lg:hidden glass-effect border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-4 font-bold text-[11px] tracking-[0.2em] uppercase">
-      <a href="#"              class="hover:text-cyan-400 transition py-1" onclick="closeMenu()">Home</a>
-      <a href="#about"         class="hover:text-cyan-400 transition py-1" onclick="closeMenu()">About Us</a>
-      <a href="activities.html"class="hover:text-cyan-400 transition py-1" onclick="closeMenu()">Activities</a>
-      <a href="#contact"       class="hover:text-cyan-400 transition py-1 text-orange-400" onclick="closeMenu()">Contact</a>
-      <a href="#" class="text-cyan-400 hover:text-white transition py-1 flex items-center gap-2">
-        <i class="fas fa-shopping-cart"></i> Cart
-      </a>
+  <div id="mobile-menu">
+    <div class="mobile-menu-inner">
+      <a href="#" onclick="closeMenu()">Home</a>
+      <a href="#about" onclick="closeMenu()">About Us</a>
+      <a href="activities.html" onclick="closeMenu()">Activities</a>
+      <a href="#contact" class="contact-link" onclick="closeMenu()">Contact</a>
+      <a href="#" style="color:#22d3ee;display:flex;align-items:center;gap:8px;"><i class="fas fa-shopping-cart"></i> Cart</a>
     </div>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════
-     HERO
-═══════════════════════════════════════════════════ -->
-<header class="hero-section relative flex items-center justify-center">
+<!-- HERO -->
+<header class="hero" id="home">
   <video autoplay muted loop playsinline id="bg-video">
     <source src="Hero-video.mp4" type="video/mp4">
   </video>
 
-  <!-- Hero Content -->
-  <div class="text-center z-10 px-4 sm:px-6 mt-16 sm:mt-20 pb-40 sm:pb-44 lg:pb-10">
-    <div class="glass-effect inline-block px-4 py-1 rounded-full mb-4 border border-white/20">
-      <span class="text-cyan-400 font-bold uppercase tracking-widest text-[9px] sm:text-[10px]">
-        Explore Nassau's Crystal Waters
-      </span>
-    </div>
-
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-4 uppercase tracking-tighter leading-tight">
-      Experience<br>
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500">The Adventure</span>
-    </h1>
-
-    <p class="text-sm sm:text-base mb-8 opacity-80 max-w-xl mx-auto font-medium px-2">
-      The premier spot for Watersports and the ultimate Private Catamaran tours in the heart of the Bahamas.
-    </p>
-
-    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center font-bold uppercase tracking-wider text-[11px]">
-      <a href="#services"
-         class="bg-white text-slate-900 px-8 py-3 rounded-full hover:bg-cyan-400 hover:text-white transition w-full sm:w-auto text-center">
-        Explore Tours
-      </a>
-      <a href="https://paradiseoceansports.com" target="_blank"
-         class="bg-cyan-500 text-white px-8 py-3 rounded-full hover:bg-cyan-400 transition shadow-lg w-full sm:w-auto text-center">
-        Book Now
-      </a>
+  <div class="hero-content">
+    <div class="hero-badge">Explore Nassau's Crystal Waters</div>
+    <h1>Experience<br><span class="gradient-text">The Adventure</span></h1>
+    <p>The premier spot for Watersports and the ultimate Private Catamaran tours in the heart of the Bahamas.</p>
+    <div class="hero-buttons">
+      <a href="#services" class="btn-explore">Explore Tours</a>
+      <a href="https://paradiseoceansports.com" target="_blank" class="btn-book-hero">Book Now</a>
     </div>
   </div>
 
-  <!-- Weather Widget — visible on ALL screen sizes -->
   <div class="weather-widget">
-    <div class="glass-effect p-3 sm:p-4 rounded-2xl sm:rounded-3xl flex items-center space-x-3 sm:space-x-4 border border-white/10 shadow-xl">
-      <i id="weather-icon" class="fas fa-sun text-yellow-400 text-xl sm:text-2xl flex-shrink-0"></i>
-      <div class="text-left min-w-0">
-        <p class="text-[9px] font-black uppercase tracking-widest text-cyan-400 leading-none mb-1 flex items-center">
-          <span class="live-dot"></span> Live Nassau Status
-        </p>
-        <div class="flex items-baseline space-x-2 flex-wrap">
-          <p id="live-temp" class="text-lg sm:text-xl font-black italic">82°F</p>
-          <p id="weather-desc" class="text-[10px] font-bold opacity-60 uppercase">Clear Skies</p>
+    <div class="weather-inner">
+      <i id="weather-icon" class="fas fa-sun"></i>
+      <div class="weather-text">
+        <div class="weather-label"><span class="live-dot"></span>Live Nassau Status</div>
+        <div class="weather-row">
+          <span id="live-temp">82°F</span>
+          <span id="weather-desc">Clear Skies</span>
         </div>
-        <p id="sea-state" class="text-[9px] font-bold opacity-80 uppercase tracking-tighter mt-1 italic truncate">
-          Sea State: Calm / Ideal for Sports
-        </p>
+        <div id="sea-state">Sea State: Calm / Ideal for Sports</div>
       </div>
     </div>
   </div>
 </header>
 
-<!-- ═══════════════════════════════════════════════════
-     SERVICES
-═══════════════════════════════════════════════════ -->
-<section id="services" class="py-10 sm:py-14 px-4 sm:px-6 bg-[#E0F2FE] text-slate-900">
-  <div class="max-w-7xl mx-auto text-center">
-    <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-tighter italic">Our Adventures</h2>
-    <div class="w-12 h-1 bg-cyan-500 mx-auto mt-2 mb-8 rounded-full"></div>
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <h2 class="section-title">Our Adventures</h2>
+  <div class="section-line"></div>
+  <div class="services-grid">
 
-    <div class="services-grid">
-
-      <!-- Jet Skis -->
-      <div class="adventure-card group relative overflow-hidden rounded-2xl shadow-md h-52 sm:h-56 w-full lg-offset">
-        <img src="Jetski.png" class="w-full h-full object-cover" alt="Jet Skis">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end text-white text-left">
-          <h3 class="text-base font-black uppercase mb-0.5">Jet Skis</h3>
-          <p class="text-[10px] opacity-80 mb-3 uppercase">Ride the waves</p>
-          <a href="https://paradiseoceansports.com" target="_blank"
-             class="bg-cyan-500 py-1.5 rounded-lg font-black uppercase text-center text-[9px] block">Book Now</a>
-        </div>
+    <div class="adventure-card">
+      <img src="Jetski.png" alt="Jet Skis">
+      <div class="card-overlay">
+        <h3>Jet Skis</h3><p>Ride the waves</p>
+        <a href="https://paradiseoceansports.com" target="_blank" class="btn-card">Book Now</a>
       </div>
-
-      <!-- Parasailing -->
-      <div class="adventure-card group relative overflow-hidden rounded-2xl shadow-md h-52 sm:h-56 w-full lg-offset">
-        <img src="Parasail.jpeg" class="w-full h-full object-cover" alt="Parasailing">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end text-white text-left">
-          <h3 class="text-base font-black uppercase mb-0.5">Parasailing</h3>
-          <p class="text-[10px] opacity-80 mb-3 uppercase">Sky High Views</p>
-          <a href="https://paradiseoceansports.com" target="_blank"
-             class="bg-cyan-500 py-1.5 rounded-lg font-black uppercase text-center text-[9px] block">Book Now</a>
-        </div>
-      </div>
-
-      <!-- Snorkeling -->
-      <div class="adventure-card group relative overflow-hidden rounded-2xl shadow-md h-52 sm:h-56 w-full lg-offset">
-        <img src="Snorkling.jpeg" class="w-full h-full object-cover" alt="Snorkeling">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end text-white text-left">
-          <h3 class="text-base font-black uppercase mb-0.5">Snorkeling</h3>
-          <p class="text-[10px] opacity-80 mb-3 uppercase">Explore the Reef</p>
-          <a href="https://paradiseoceansports.com" target="_blank"
-             class="bg-cyan-500 py-1.5 rounded-lg font-black uppercase text-center text-[9px] block">Book Now</a>
-        </div>
-      </div>
-
-      <!-- Banana Boat -->
-      <div class="adventure-card group relative overflow-hidden rounded-2xl shadow-md h-52 sm:h-56 w-full lg-offset" style="grid-column: auto;">
-        <img src="BananaBoat.jpeg" class="w-full h-full object-cover" alt="Banana Boat">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end text-white text-left">
-          <h3 class="text-base font-black uppercase mb-0.5">Banana Boat</h3>
-          <p class="text-[10px] opacity-80 mb-3 uppercase">Group Fun</p>
-          <a href="https://paradiseoceansports.com" target="_blank"
-             class="bg-cyan-500 py-1.5 rounded-lg font-black uppercase text-center text-[9px] block">Book Now</a>
-        </div>
-      </div>
-
-      <!-- Swimming Pigs -->
-      <div class="adventure-card group relative overflow-hidden rounded-2xl shadow-md h-52 sm:h-56 w-full lg-offset" style="grid-column: auto;">
-        <img src="SwimmingPigs.jpeg" class="w-full h-full object-cover" alt="Swimming Pigs">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end text-white text-left">
-          <h3 class="text-base font-black uppercase mb-0.5">Swimming Pigs</h3>
-          <p class="text-[10px] opacity-80 mb-3 uppercase">Ultimate Experience</p>
-          <a href="https://paradiseoceansports.com" target="_blank"
-             class="bg-cyan-500 py-1.5 rounded-lg font-black uppercase text-center text-[9px] block">Book Now</a>
-        </div>
-      </div>
-
     </div>
+
+    <div class="adventure-card">
+      <img src="Parasail.jpeg" alt="Parasailing">
+      <div class="card-overlay">
+        <h3>Parasailing</h3><p>Sky High Views</p>
+        <a href="https://paradiseoceansports.com" target="_blank" class="btn-card">Book Now</a>
+      </div>
+    </div>
+
+    <div class="adventure-card">
+      <img src="Snorkling.jpeg" alt="Snorkeling">
+      <div class="card-overlay">
+        <h3>Snorkeling</h3><p>Explore the Reef</p>
+        <a href="https://paradiseoceansports.com" target="_blank" class="btn-card">Book Now</a>
+      </div>
+    </div>
+
+    <div class="adventure-card">
+      <img src="BananaBoat.jpeg" alt="Banana Boat">
+      <div class="card-overlay">
+        <h3>Banana Boat</h3><p>Group Fun</p>
+        <a href="https://paradiseoceansports.com" target="_blank" class="btn-card">Book Now</a>
+      </div>
+    </div>
+
+    <div class="adventure-card">
+      <img src="SwimmingPigs.jpeg" alt="Swimming Pigs">
+      <div class="card-overlay">
+        <h3>Swimming Pigs</h3><p>Ultimate Experience</p>
+        <a href="https://paradiseoceansports.com" target="_blank" class="btn-card">Book Now</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     PRICING / PACKAGES
-═══════════════════════════════════════════════════ -->
-<section id="about" class="py-10 sm:py-14 px-4 sm:px-6 bg-slate-50 text-slate-800">
-  <div class="max-w-7xl mx-auto">
-    <div class="pricing-grid">
+<!-- PACKAGES -->
+<section class="packages-section" id="about">
+  <div class="packages-grid">
 
-      <!-- Basic Package -->
-      <div class="bg-white p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] shadow-sm border border-slate-100 flex flex-col">
-        <h3 class="text-xl sm:text-2xl font-black uppercase tracking-tighter text-slate-900 mb-2">Basic Package</h3>
-        <div class="flex flex-col text-cyan-600 font-bold uppercase tracking-widest text-[10px] mb-6 gap-0.5">
-          <span>Watersports Tour</span>
-          <span>$120.00 — Adult (13 years+)</span>
-          <span>$90.00 — Child (12 years and younger)</span>
-          <span>4 Hours (10:30 – 02:30)</span>
-        </div>
-        <ul class="space-y-2 mb-8 flex-grow text-[13px] opacity-90 text-left">
-          <li><i class="fas fa-check text-cyan-500 mr-2"></i>Tour of Nassau Harbour</li>
-          <li><i class="fas fa-check text-cyan-500 mr-2"></i>Snorkeling at the reef</li>
-          <li><i class="fas fa-check text-cyan-500 mr-2"></i>Swimming pigs</li>
-          <li><i class="fas fa-check text-cyan-500 mr-2"></i>Sun, Sand & Sea at the Beach</li>
-          <li class="font-bold bg-cyan-50 p-2 rounded-lg text-xs mt-4">
-            <i class="fas fa-utensils text-cyan-500 mr-2"></i>Bahamian Lunch: BBQ Chicken, Peas & Rice, Corn
-          </li>
-          <li class="italic text-[11px]">
-            <i class="fas fa-glass-martini-alt text-orange-400 mr-2"></i>Complimentary Fruit & Rum Punch
-          </li>
-        </ul>
-        <a href="https://paradiseoceansports.com" target="_blank"
-           class="block text-center py-3 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-cyan-500 transition">
-          Book Basic
-        </a>
+    <div class="package-card">
+      <h3>Basic Package</h3>
+      <div class="package-meta cyan">
+        <span>Watersports Tour</span>
+        <span>$120.00 — Adult (13 years+)</span>
+        <span>$90.00 — Child (12 years and younger)</span>
+        <span>4 Hours (10:30 – 02:30)</span>
       </div>
-
-      <!-- Total Package -->
-      <div class="bg-white p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] shadow-xl border-2 border-yellow-500 relative flex flex-col">
-        <div class="absolute -top-3 right-6 sm:right-8 bg-yellow-500 text-white px-4 py-1 rounded-full font-black text-[9px] uppercase tracking-widest shadow-lg">
-          Adventure Plus
-        </div>
-        <h3 class="text-xl sm:text-2xl font-black uppercase tracking-tighter text-slate-900 mb-2">Total Package</h3>
-        <div class="flex flex-col text-yellow-500 font-bold uppercase tracking-widest text-[10px] mb-6 gap-0.5">
-          <span>The Full Island Experience</span>
-          <span>$250.00 — Adult (13 years+)</span>
-          <span>$220.00 — Child (12 years and younger)</span>
-          <span>4 Hours (10:30 – 02:30)</span>
-        </div>
-        <ul class="space-y-2 mb-8 flex-grow text-[13px] text-left">
-          <li class="font-bold text-cyan-600 bg-cyan-50 p-2 rounded-lg text-xs mb-4">
-            <i class="fas fa-plus-circle mr-2"></i>JET SKI, PARASAIL & BANANA BOAT INCLUDED
-          </li>
-          <li><i class="fas fa-check text-cyan-500 mr-2"></i>All Basic Package Inclusions</li>
-          <li><i class="fas fa-check text-cyan-500 mr-2"></i>Tour of Nassau Harbour</li>
-          <li><i class="fas fa-check text-cyan-500 mr-2"></i>Snorkeling at the reef</li>
-          <li><i class="fas fa-check text-cyan-500 mr-2"></i>Swimming pigs</li>
-          <li class="font-bold"><i class="fas fa-utensils text-cyan-500 mr-2"></i>Delicious Bahamian BBQ Lunch</li>
-          <li class="italic text-[11px]">
-            <i class="fas fa-glass-martini-alt text-orange-400 mr-2"></i>Complimentary Fruit & Rum Punch
-          </li>
-        </ul>
-        <a href="https://paradiseoceansports.com" target="_blank"
-           class="block text-center py-3 bg-cyan-500 text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-slate-900 transition shadow-lg shadow-cyan-200">
-          Book Total Package
-        </a>
-      </div>
-
+      <ul class="package-list">
+        <li><i class="fas fa-check"></i>Tour of Nassau Harbour</li>
+        <li><i class="fas fa-check"></i>Snorkeling at the reef</li>
+        <li><i class="fas fa-check"></i>Swimming pigs</li>
+        <li><i class="fas fa-check"></i>Sun, Sand & Sea at the Beach</li>
+        <li><div class="highlight"><i class="fas fa-utensils" style="color:#06b6d4;margin-right:6px;"></i>Bahamian Lunch: BBQ Chicken, Peas & Rice, Corn</div></li>
+        <li class="note"><i class="fas fa-glass-martini-alt"></i>Complimentary Fruit & Rum Punch</li>
+      </ul>
+      <a href="https://paradiseoceansports.com" target="_blank" class="btn-package dark">Book Basic</a>
     </div>
+
+    <div class="package-card featured">
+      <div class="featured-badge">Adventure Plus</div>
+      <h3>Total Package</h3>
+      <div class="package-meta yellow">
+        <span>The Full Island Experience</span>
+        <span>$250.00 — Adult (13 years+)</span>
+        <span>$220.00 — Child (12 years and younger)</span>
+        <span>4 Hours (10:30 – 02:30)</span>
+      </div>
+      <ul class="package-list">
+        <li><div class="feature-highlight"><i class="fas fa-plus-circle" style="color:#06b6d4;margin-right:6px;"></i>JET SKI, PARASAIL & BANANA BOAT INCLUDED</div></li>
+        <li><i class="fas fa-check"></i>All Basic Package Inclusions</li>
+        <li><i class="fas fa-check"></i>Tour of Nassau Harbour</li>
+        <li><i class="fas fa-check"></i>Snorkeling at the reef</li>
+        <li><i class="fas fa-check"></i>Swimming pigs</li>
+        <li><i class="fas fa-utensils"></i>Delicious Bahamian BBQ Lunch</li>
+        <li class="note"><i class="fas fa-glass-martini-alt"></i>Complimentary Fruit & Rum Punch</li>
+      </ul>
+      <a href="https://paradiseoceansports.com" target="_blank" class="btn-package cyan">Book Total Package</a>
+    </div>
+
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     FOOTER / CONTACT
-═══════════════════════════════════════════════════ -->
-<footer id="contact" class="bg-slate-950 pt-12 sm:pt-16 pb-8 px-4 sm:px-6 border-t border-white/5">
-  <div class="max-w-7xl mx-auto text-[11px]">
-    <div class="footer-grid mb-10 sm:mb-12 text-left">
-
-      <!-- Brand -->
-      <div class="col-span-2 md:col-span-1">
-        <h2 class="text-base sm:text-lg font-black uppercase mb-3 italic tracking-tighter text-white">
-          Paradise <span class="text-cyan-400 text-[10px] tracking-widest">Ocean Sports</span>
-        </h2>
-        <p class="opacity-40 leading-relaxed">Nassau's premier choice for water adventures since 2012.</p>
-      </div>
-
-      <!-- Operations -->
-      <div>
-        <h4 class="font-black uppercase tracking-widest text-[9px] text-cyan-400 mb-3 sm:mb-4">Operations</h4>
-        <p class="opacity-40 mb-1">Open Daily</p>
-        <p class="font-black mb-4 uppercase">10:00 AM — 4:00 PM</p>
-      </div>
-
-      <!-- Contact -->
-      <div>
-        <h4 class="font-black uppercase tracking-widest text-[9px] text-cyan-400 mb-3 sm:mb-4">Contact</h4>
-        <p class="opacity-40 mb-1">WhatsApp</p>
-        <p class="font-black mb-4">+1 (242) 000-0000</p>
-      </div>
-
-      <!-- Payments -->
-      <div>
-        <h4 class="font-black uppercase tracking-widest text-[9px] text-cyan-400 mb-3 sm:mb-4">Payments</h4>
-        <div class="flex flex-wrap gap-3 text-xl sm:text-2xl opacity-30">
-          <i class="fab fa-cc-visa"></i>
-          <i class="fab fa-cc-mastercard"></i>
-          <i class="fab fa-cc-amex"></i>
-          <i class="fab fa-apple-pay"></i>
-          <i class="fab fa-google-pay"></i>
-        </div>
-      </div>
-
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>Paradise <span>Ocean Sports</span></h2>
+      <p>Nassau's premier choice for water adventures since 2012.</p>
     </div>
-
-    <div class="border-t border-white/5 pt-6 text-center opacity-30 text-[10px]">
-      © 2025 Paradise Ocean Sports. All rights reserved.
+    <div class="footer-col">
+      <h4>Operations</h4>
+      <p class="muted">Open Daily</p>
+      <p class="strong">10:00 AM — 4:00 PM</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p class="muted">WhatsApp</p>
+      <p class="strong">+1 (242) 000-0000</p>
+    </div>
+    <div class="footer-col">
+      <h4>Payments</h4>
+      <div class="payment-icons">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+        <i class="fab fa-apple-pay"></i>
+        <i class="fab fa-google-pay"></i>
+      </div>
     </div>
   </div>
+  <div class="footer-bottom">© 2025 Paradise Ocean Sports. All rights reserved.</div>
 </footer>
 
-<!-- ═══════════════════════════════════════════════════
-     SCRIPTS
-═══════════════════════════════════════════════════ -->
 <script>
-  /* ── Weather ── */
   async function fetchNassauWeather() {
     try {
-      const res = await fetch(
-        'https://api.open-meteo.com/v1/forecast?latitude=25.0582&longitude=-77.3431' +
-        '&current=temperature_2m,wind_speed_10m,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph'
-      );
+      const res  = await fetch('https://api.open-meteo.com/v1/forecast?latitude=25.0582&longitude=-77.3431&current=temperature_2m,wind_speed_10m,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph');
       const data = await res.json();
-      const temp     = Math.round(data.current.temperature_2m);
-      const wind     = data.current.wind_speed_10m;
-      const wCode    = data.current.weather_code;
-
+      const temp  = Math.round(data.current.temperature_2m);
+      const wind  = data.current.wind_speed_10m;
+      const wCode = data.current.weather_code;
       document.getElementById('live-temp').innerText    = temp + '°F';
       document.getElementById('sea-state').innerText    = 'Sea State: ' + (wind > 15 ? 'Breezy' : 'Calm / Ideal');
       document.getElementById('weather-desc').innerText = wCode > 0 ? 'Partly Cloudy' : 'Clear Skies';
-
-      if (wCode >= 51) {
-        document.getElementById('weather-icon').className = 'fas fa-cloud-rain text-blue-300 text-xl sm:text-2xl flex-shrink-0';
-      } else if (wCode > 0) {
-        document.getElementById('weather-icon').className = 'fas fa-cloud-sun text-yellow-300 text-xl sm:text-2xl flex-shrink-0';
-      }
-    } catch (e) { console.log('Weather error', e); }
+      const icon = document.getElementById('weather-icon');
+      if      (wCode >= 51) { icon.className = 'fas fa-cloud-rain'; icon.style.color = '#93c5fd'; }
+      else if (wCode >  0)  { icon.className = 'fas fa-cloud-sun';  icon.style.color = '#fde047'; }
+      else                  { icon.className = 'fas fa-sun';        icon.style.color = '#facc15'; }
+    } catch(e) {}
   }
   fetchNassauWeather();
 
-  /* ── Hamburger ── */
   const hamburger  = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
-  const lines      = hamburger.querySelectorAll('.hamburger-line');
+  const h1 = document.getElementById('h1');
+  const h2 = document.getElementById('h2');
+  const h3 = document.getElementById('h3');
 
   hamburger.addEventListener('click', () => {
     const isOpen = mobileMenu.classList.toggle('open');
-    // Animate to X
     if (isOpen) {
-      lines[0].style.transform = 'translateY(7px) rotate(45deg)';
-      lines[1].style.opacity   = '0';
-      lines[2].style.transform = 'translateY(-7px) rotate(-45deg)';
-    } else {
-      lines[0].style.transform = '';
-      lines[1].style.opacity   = '';
-      lines[2].style.transform = '';
-    }
+      h1.style.transform = 'translateY(7px) rotate(45deg)';
+      h2.style.opacity   = '0';
+      h3.style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else { closeMenu(); }
   });
 
   function closeMenu() {
     mobileMenu.classList.remove('open');
-    lines[0].style.transform = '';
-    lines[1].style.opacity   = '';
-    lines[2].style.transform = '';
+    h1.style.transform = h3.style.transform = '';
+    h2.style.opacity = '';
   }
 
-  // Close menu on outside click
   document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-      closeMenu();
-    }
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
   });
 </script>
 </body>
