@@ -56,13 +56,13 @@ nav {
 .btn-book-nav {
   background: #06b6d4;
   color: #fff !important;
-  padding: 8px 22px;
+  padding: 8px 18px;
   border-radius: 999px;
   font-weight: 900;
   white-space: nowrap;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.15s;
 }
-.btn-book-nav:hover { background: #22d3ee; }
+.btn-book-nav:hover { background: #0891b2; transform: translateY(-1px); }
 .nav-mobile-right {
   display: flex;
   align-items: center;
@@ -71,16 +71,16 @@ nav {
 .btn-book-mobile {
   background: #06b6d4;
   color: #fff;
-  padding: 7px 14px;
+  padding: 7px 16px;
   border-radius: 999px;
   font-size: 10px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   white-space: nowrap;
   transition: background 0.2s;
 }
-.btn-book-mobile:hover { background: #22d3ee; }
+.btn-book-mobile:hover { background: #0891b2; }
 #hamburger {
   background: none;
   border: none;
@@ -196,33 +196,31 @@ nav {
 .btn-explore {
   background: #fff;
   color: #0f172a;
-  padding: 14px 36px;
+  padding: 11px 26px;
   border-radius: 999px;
   font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  width: 100%;
-  max-width: 280px;
+  letter-spacing: 0.12em;
   text-align: center;
+  display: inline-block;
   transition: background 0.2s, color 0.2s;
 }
-.btn-explore:hover { background: #22d3ee; color: #fff; }
+.btn-explore:hover { background: #e0f2fe; }
 .btn-book-hero {
   background: #06b6d4;
   color: #fff;
-  padding: 14px 36px;
+  padding: 11px 26px;
   border-radius: 999px;
   font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  width: 100%;
-  max-width: 280px;
+  letter-spacing: 0.12em;
   text-align: center;
+  display: inline-block;
   transition: background 0.2s;
 }
-.btn-book-hero:hover { background: #22d3ee; }
+.btn-book-hero:hover { background: #0891b2; }
 
 /* Weather */
 .weather-widget {
@@ -336,19 +334,117 @@ nav {
   margin-bottom: 10px;
 }
 .btn-card {
-  display: block;
+  display: inline-block;
   background: #06b6d4;
   color: #fff;
-  text-align: center;
-  padding: 7px;
-  border-radius: 8px;
-  font-size: 9px;
+  padding: 11px 26px;
+  border-radius: 999px;
+  font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  text-align: center;
   transition: background 0.2s;
+  align-self: flex-end;
 }
-.btn-card:hover { background: #22d3ee; }
+.btn-card:hover { background: #0891b2; }
+
+/* ══════════════════════════════════════
+   ACTIVITY DETAILS
+══════════════════════════════════════ */
+.details-section {
+  background: #0f172a;
+  color: #fff;
+  padding: 60px 20px;
+}
+.details-section .section-title { color: #fff; }
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.detail-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.detail-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(6,182,212,0.35);
+}
+.detail-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+.detail-icon.cyan {
+  background: rgba(6,182,212,0.15);
+  box-shadow: 0 0 0 6px rgba(6,182,212,0.07);
+  color: #22d3ee;
+}
+.detail-icon.blue {
+  background: rgba(59,130,246,0.15);
+  box-shadow: 0 0 0 6px rgba(59,130,246,0.07);
+  color: #60a5fa;
+}
+.detail-icon.teal {
+  background: rgba(20,184,166,0.15);
+  box-shadow: 0 0 0 6px rgba(20,184,166,0.07);
+  color: #2dd4bf;
+}
+.detail-icon.orange {
+  background: rgba(251,146,60,0.15);
+  box-shadow: 0 0 0 6px rgba(251,146,60,0.07);
+  color: #fb923c;
+}
+.detail-icon.pink {
+  background: rgba(244,114,182,0.15);
+  box-shadow: 0 0 0 6px rgba(244,114,182,0.07);
+  color: #f472b6;
+}
+.detail-card h3 {
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+.detail-tag {
+  display: inline-block;
+  background: rgba(6,182,212,0.15);
+  color: #22d3ee;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+.detail-card p {
+  font-size: 13px;
+  line-height: 1.7;
+  opacity: 0.7;
+}
+@media (min-width: 600px) {
+  .details-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .details-grid { grid-template-columns: repeat(3, 1fr); }
+}
 
 /* ══════════════════════════════════════
    PACKAGES
@@ -442,20 +538,24 @@ nav {
 .note { font-size: 11px; font-style: italic; opacity: 0.75; }
 .note i { color: #fb923c !important; }
 .btn-package {
-  display: block;
-  text-align: center;
-  padding: 14px;
-  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  border-radius: 10px;
   font-size: 10px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.12em;
+  transition: background 0.2s, transform 0.15s;
+  width: 100%;
 }
+.btn-package::after { content: '→'; font-size: 13px; }
 .btn-package.dark { background: #0f172a; color: #fff; }
-.btn-package.dark:hover { background: #06b6d4; }
+.btn-package.dark:hover { background: #06b6d4; transform: translateY(-1px); }
 .btn-package.cyan { background: #06b6d4; color: #fff; }
-.btn-package.cyan:hover { background: #0f172a; }
+.btn-package.cyan:hover { background: #0891b2; transform: translateY(-1px); }
 
 /* ══════════════════════════════════════
    FOOTER
@@ -661,6 +761,50 @@ footer {
         <h3>Swimming Pigs</h3><p>Ultimate Experience</p>
         <a href="https://paradiseoceansports.com" target="_blank" class="btn-card">Book Now</a>
       </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACTIVITY DETAILS -->
+<section class="details-section">
+  <h2 class="section-title">What's In Store</h2>
+  <div class="section-line"></div>
+  <div class="details-grid">
+
+    <div class="detail-card">
+      <div class="detail-icon cyan"><i class="fas fa-water"></i></div>
+      <div class="detail-tag">High Speed Thrills</div>
+      <h3>Jet Skis</h3>
+      <p>Grip the handlebars, hit the throttle, and tear across the crystal-clear waters of Nassau Harbour. Whether you're a first-timer or a seasoned rider, our jet skis deliver an adrenaline rush unlike anything else — with the stunning Bahamian coastline as your backdrop.</p>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-icon blue"><i class="fas fa-parachute-box"></i></div>
+      <div class="detail-tag">Sky High Views</div>
+      <h3>Parasailing</h3>
+      <p>Soar up to 400 feet above the turquoise sea and take in breathtaking panoramic views of Nassau and Paradise Island. It's peaceful, exhilarating, and absolutely unforgettable — the ultimate way to see the Bahamas from a whole new perspective.</p>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-icon teal"><i class="fas fa-fish"></i></div>
+      <div class="detail-tag">Underwater World</div>
+      <h3>Snorkeling</h3>
+      <p>Dip beneath the surface and discover a vibrant world of coral reefs, tropical fish, and stunning sea life. Our guided snorkeling excursion takes you to some of Nassau's most beautiful reef spots — gear included, no experience needed.</p>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-icon orange"><i class="fas fa-laugh-beam"></i></div>
+      <div class="detail-tag">Group Fun</div>
+      <h3>Banana Boat</h3>
+      <p>Hold on tight and laugh until your sides hurt! Our banana boat ride is the perfect group activity — friends, family, kids, everyone gets soaked and everyone has a blast. The only question is: how long can you hang on before you hit the water?</p>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-icon pink"><i class="fas fa-star"></i></div>
+      <div class="detail-tag">Only in the Bahamas</div>
+      <h3>Swimming Pigs</h3>
+      <p>Yes, you read that right. Meet the world-famous swimming pigs of the Bahamas and swim alongside them in their natural habitat. It's quirky, it's joyful, and it makes for the kind of story and photos you'll be sharing for years to come.</p>
     </div>
 
   </div>
